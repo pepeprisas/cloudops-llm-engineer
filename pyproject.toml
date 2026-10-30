@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cloudpilot"
+version = "0.1.0"
+description = "Turns natural-language requests into reviewed AWS infrastructure deployments."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3",
+    "fastapi",
+    "langgraph",
+    "pydantic",
+    "pydantic-settings",
+]
