@@ -34,18 +34,31 @@ Agents reach external systems only through MCP servers, never directly:
 - `cloudwatch` — logs, metrics, alarms, health (read-only)
 - `github` — create PR/issue, commit, comment, review
 
-Agent roster: Planner · Terraform · Security · Cost · Best Practices · Documentation · Deployment · Report.
+## Agent boundaries
+
+Each agent has a hard capability boundary. Limiting capability limits blast radius.
+
+| Agent | Cannot |
+|---|---|
+| Planner | Deploy infrastructure · Generate Terraform |
+| Terraform | Apply infrastructure · Run terraform plan · Execute shell directly |
+| Security | Modify Terraform · Deploy infrastructure · Approve |
+| Cost | Modify Terraform · Deploy infrastructure · Approve |
+| Best Practices | Modify Terraform · Deploy infrastructure · Approve |
+| Documentation | Modify Terraform · Deploy infrastructure |
+| Deployment | Generate infrastructure · Generate Terraform · Bypass approval · Execute shell directly |
+| Report | Modify infrastructure · Approve |
 
 ## Engineering baseline
 
 This project is built using the [AI Engineering Toolkit](https://github.com/pepeprisas/ai-engineering-toolkit) specifications.
 
 - `specs/` and `.opencode/agents/build/` are vendored from the toolkit, unmodified. See `specs/SOURCES.md` for provenance.
-- `docs/` holds CloudPilot-specific design (architecture, state machine, agents, MCP, API).
-- `tasks/` holds the ordered implementation backlog.
+- `tasks/000-tasks-list.md` is the implementation roadmap. The per-task detail files live in the `ai_cloudops_engineer` reference repository.
+- CloudPilot-specific design — state machine, agent definitions, MCP contracts, API — also lives in that reference repository and is pulled in as each phase is built.
 
 Consult `AGENTS.md` before implementing.
 
 ## Status
 
-Design stage. Specifications and backlog are in place; no runtime code yet.
+Design stage. Specifications and the implementation roadmap are in place; no runtime code yet.

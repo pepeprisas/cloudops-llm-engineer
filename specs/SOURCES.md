@@ -54,3 +54,4 @@ These are the only files permitted to live alongside vendored specs without a to
 | `AGENTS.md` | Project engineering instructions. |
 | `README.md` | Product overview. |
 | `specs/SOURCES.md` | This manifest. |
+| `tasks/000-tasks-list.md` | Implementation roadmap, ported from `ai_cloudops_engineer/tasks/000-tasks-list.md` and trimmed (provenance note added; stale `docs/security.md` pointer and the historical renumbering appendix dropped). Per-task detail files were not ported. |
