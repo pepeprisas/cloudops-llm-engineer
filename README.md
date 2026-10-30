@@ -96,4 +96,4 @@ Consult `AGENTS.md` before implementing.
 
 ## Status
 
-Design stage. Specifications and the implementation roadmap are in place; no runtime code yet.
+Phase 1 (foundation) is complete: project scaffold, dev tooling (ruff, mypy, Makefile, pre-commit), structured logging with secret redaction, typed configuration, the AWS session factory, and the containerized app with its health check. Not yet built: the workflow engine (Phase 2), agents, Terraform/MCP integration, reviews, governance, and deployment — see `tasks/000-tasks-list.md`.
