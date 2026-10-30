@@ -14,9 +14,11 @@ Build **CloudPilot**, a Python application that turns natural-language requests 
 
   ```
   uv venv --python 3.12 .venv
-  uv pip install -e . --python .venv/bin/python
+  uv pip install -e . --group dev --python .venv/bin/python
   .venv/bin/python -m pytest -q
   ```
+
+  The `--group dev` flag is required: it installs `[dependency-groups]` from `pyproject.toml`, which is where pytest is declared. Plain `uv pip install -e .` installs only `[project] dependencies` and leaves pytest absent.
 
 - **Build backend:** hatchling.
 - **Dependencies are deliberately unpinned.** Task 001 puts dependency pinning out of scope; it arrives with `tasks/002-dev-environment.md`. Do not commit a `uv.lock` yet, and do not add `==` pins to `[project] dependencies`.
