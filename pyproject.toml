@@ -19,6 +19,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest",
+    "ruff",
+    "mypy",
 ]
 
 [tool.pytest.ini_options]
@@ -27,3 +29,28 @@ markers = [
     "unit: fast, isolated tests with no external dependencies",
     "integration: tests requiring external systems such as AWS",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+# The formatter owns line length; long docstrings and comments are not
+# worth failing lint over.
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["cloudpilot"]
+
+[tool.ruff.format]
+# Black-compatible profile made explicit so intent survives review.
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src", "tests"]
+strict = true
+show_error_codes = true

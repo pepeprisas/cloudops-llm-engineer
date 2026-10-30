@@ -1,0 +1,27 @@
+# All hooks are local `language: system` hooks that call the uv-managed
+# virtualenv binaries. This guarantees pre-commit, `make lint`, and
+# `make typecheck` run the identical tool versions.
+#
+# Run `make install` (which creates .venv) before `pre-commit install`,
+# otherwise the hook entry points do not exist.
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: .venv/bin/ruff check
+        language: system
+        types: [python]
+      - id: ruff-format
+        name: ruff format
+        entry: .venv/bin/ruff format
+        language: system
+        types_or: [python, pyi, jupyter]
+      - id: mypy
+        name: mypy
+        entry: .venv/bin/mypy
+        language: system
+        # The whole configured file set is checked at once; filenames are not
+        # passed individually because cross-file analysis needs the full set.
+        pass_filenames: false
+        types: [python]

@@ -83,7 +83,7 @@ Three consequences worth stating explicitly:
 - **`api/` is transport only.** Approval decisions, retries, and orchestration stay in `graph/`. Nothing imports `api/`.
 - **`mcp/` is the boundary to external systems.** Nothing outside it talks to AWS, GitHub, or terraform directly — which is what makes the "never execute shell directly" rule enforceable rather than aspirational.
 
-These rules are **documented but not yet enforced**. No task in the backlog currently owns enforcement — `tasks/002-dev-environment.md` (lint/type tooling, pre-commit) is the natural home for it. Until then they rely on review.
+These rules are **enforced** by `tests/test_import_direction.py`, an AST check in the pytest suite (added by Task 002). Change the allow-table there together with this table.
 
 ## Engineering baseline
 

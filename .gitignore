@@ -21,3 +21,11 @@ htmlcov/
 # Local environment and secrets — never commit credentials
 .env
 .env.*
+# ...but .env.example documents placeholder-only settings and must be
+# committable (Task 004 delivers it).
+!.env.example
+
+# The dependency lockfile is deliberately not committed: pinning is out of
+# scope until the dev-environment follow-up. See AGENTS.md. `uv sync` still
+# works locally; remove this line when pinning lands.
+uv.lock

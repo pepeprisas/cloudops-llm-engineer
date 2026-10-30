@@ -33,7 +33,7 @@ grep -c '^- \[ \]' tasks/000-tasks-list.md
 ## Phase 1 — Foundation (no AI yet)
 
 - [x] 001 Project scaffold
-- [ ] 002 Development environment
+- [x] 002 Development environment
 - [ ] 003 Logging
 - [ ] 004 Configuration management
 - [x] 005 Testing framework
