@@ -6,6 +6,22 @@ Build **CloudPilot**, a Python application that turns natural-language requests 
 
 `specs/` and `.opencode/` are vendored from ai-engineering-toolkit. Treat them as read-only inputs: apply them, do not fork or weaken them.
 
+## Toolchain
+
+- **Python 3.12 is required** (`requires-python = ">=3.12"`). The system interpreter may be older — if `python3 --version` reports 3.10 or 3.11, do not use it; the editable install will refuse.
+- **`uv` manages the interpreter and the environment.** If `uv` is absent: `python3 -m pip install --user uv`, then `export PATH="$HOME/.local/bin:$PATH"`.
+- Set up and test:
+
+  ```
+  uv venv --python 3.12 .venv
+  uv pip install -e . --python .venv/bin/python
+  .venv/bin/python -m pytest -q
+  ```
+
+- **Build backend:** hatchling.
+- **Dependencies are deliberately unpinned.** Task 001 puts dependency pinning out of scope; it arrives with `tasks/002-dev-environment.md`. Do not commit a `uv.lock` yet, and do not add `==` pins to `[project] dependencies`.
+- **Dev tooling is not configured yet.** `tasks/002-dev-environment.md` adds ruff, mypy, the Makefile and pre-commit. Until then the only gate is `.venv/bin/python -m pytest`.
+
 ## Before implementation
 
 1. Inspect the repository and existing project conventions.

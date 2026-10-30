@@ -1,4 +1,4 @@
-# ai-cloudops-engineer
+# cloudops-llm-engineer
 
 **CloudPilot** — an AI agent that turns natural-language requests ("Deploy a FastAPI application") into safe, reviewed AWS infrastructure deployments.
 
