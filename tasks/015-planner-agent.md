@@ -6,7 +6,7 @@ Build an LLM agent that converts a natural-language request into a `DeploymentPl
 
 ## Inputs
 
-Natural-language deployment request; `DeploymentPlan` schema (Task 014); LLM agent abstraction (Task 009).
+Natural-language deployment request; `DeploymentPlan` schema (Task 014); LLM agent abstraction (Task 049).
 
 ## Outputs
 
@@ -15,7 +15,7 @@ A Planner agent that returns a populated, validated `DeploymentPlan`.
 ## Dependencies
 
 Task 014
-Task 009
+Task 049
 
 ## Acceptance Criteria
 

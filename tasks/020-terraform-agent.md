@@ -6,7 +6,7 @@ Build an LLM agent that converts a `DeploymentPlan` into a `TerraformProject` wi
 
 ## Inputs
 
-`DeploymentPlan` (Task 014); LLM agent abstraction (Task 009).
+`DeploymentPlan` (Task 014); LLM agent abstraction (Task 049).
 
 ## Outputs
 
@@ -15,7 +15,7 @@ A Terraform agent that produces a `TerraformProject` (standard directory/file st
 ## Dependencies
 
 Task 014
-Task 009
+Task 049
 
 ## Acceptance Criteria
 

@@ -15,6 +15,7 @@ Source code lives under the `src/cloudpilot/` package; tests under `tests/`.
 - `apply` and `destroy` are **approval-gated** (Phase 6 must exist before Phase 7
   mutates anything).
 - The `DeploymentPlan` schema (014) is a hard dependency of every Phase 3/4 task.
+- No agent calls a model client directly — all model access goes through the LLM agent abstraction (049).
 - Every action that changes state or AWS resources writes to the audit trail (033).
 
 ## Phase 1 — Foundation (no AI yet)
@@ -39,6 +40,7 @@ Source code lives under the `src/cloudpilot/` package; tests under `tests/`.
 ## Phase 3 — Planner (first intelligent component)
 
 - 014 DeploymentPlan schema  *(front of phase — it is the contract)*
+- 049 LLM Agent Abstraction  *(added later, numbered 049 — scheduled here because 015 and 020 both depend on it)*
 - 015 Planner Agent
 - 016 Planner prompt
 - 017 Requirement extraction
