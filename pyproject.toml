@@ -15,3 +15,15 @@ dependencies = [
     "pydantic",
     "pydantic-settings",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "unit: fast, isolated tests with no external dependencies",
+    "integration: tests requiring external systems such as AWS",
+]

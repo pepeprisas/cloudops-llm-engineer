@@ -19,8 +19,8 @@ Task 001
 ## Acceptance Criteria
 
 - `pyproject.toml` contains a `[tool.pytest.ini_options]` section configuring test paths and discovery
-- `tests/conftest.py` defines shared fixtures (e.g. settings override, temp dirs)
-- Test naming and layout conventions are documented (in conftest or README)
+- `tests/conftest.py` documents the test naming, marker, and layout conventions
+- Shared fixtures are added by the task that needs them; `conftest.py` defines none in advance, because no fixture has a demonstrable consumer yet (Task 004 supplies `Settings`)
 - `pytest` runs and collects tests successfully from the scaffold
 - Markers for unit vs integration tests are registered
 - Unit tests pass
