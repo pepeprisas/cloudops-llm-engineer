@@ -1,0 +1,29 @@
+# Build context hygiene: no VCS history, no virtualenvs, no caches, and
+# above all no .env or credential material (see AGENTS.md hard rule 2).
+.git
+.gitignore
+.venv
+venv
+.opencode
+.pytest_cache
+.mypy_cache
+.ruff_cache
+__pycache__
+*.py[cod]
+*.egg-info
+build
+dist
+
+# Secrets / local environment
+.env
+.env.*
+
+# Not needed inside the image
+tests
+tasks
+specs
+Makefile
+.pre-commit-config.yaml
+Dockerfile
+docker-compose.yml
+.dockerignore

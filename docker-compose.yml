@@ -1,0 +1,50 @@
+# Local development stack: the app plus the checkpoint database service
+# (Postgres — the choice is provisional until Task 012 wires real
+# persistence). Dev-only; production orchestration is out of scope.
+#
+# NO AWS CREDENTIALS APPEAR HERE. The app reads the operator's ambient
+# credentials at runtime (env or mounted ~/.aws); compose must never
+# generate or bake them in (AGENTS.md hard rule 2).
+
+services:
+  app:
+    build: .
+    ports:
+      # Host port 8010 avoids a pre-existing service on the host's 8000;
+      # inside the container the app still listens on 8000.
+      - "127.0.0.1:8010:8000"
+    environment:
+      CLOUDPILOT_LOG_JSON: "true"
+      CLOUDPILOT_AWS_REGION: ${CLOUDPILOT_AWS_REGION:-us-east-1}
+      # Ambient AWS credentials pass through from the host when set:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+      AWS_PROFILE: ${AWS_PROFILE:-}
+    read_only: true
+    tmpfs:
+      - /tmp
+    depends_on:
+      checkpoint-db:
+        condition: service_healthy
+
+  checkpoint-db:
+    image: postgres:16-alpine
+    # Bound to loopback: the default binds all interfaces.
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      # Local-dev-only credentials, not secrets; never used against AWS.
+      POSTGRES_USER: cloudpilot
+      POSTGRES_PASSWORD: cloudpilot-dev-only
+      POSTGRES_DB: cloudpilot
+    volumes:
+      - checkpoint-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloudpilot -d cloudpilot"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  checkpoint-data:

@@ -14,6 +14,9 @@ dependencies = [
     "langgraph",
     "pydantic",
     "pydantic-settings",
+    # ASGI server: FastAPI ships none, the container needs one, and Task
+    # 010's API layer requires it regardless.
+    "uvicorn",
 ]
 
 [dependency-groups]
@@ -21,6 +24,9 @@ dev = [
     "pytest",
     "ruff",
     "mypy",
+    # Required by fastapi.testclient.TestClient (Task 006 and Task 010
+    # API tests).
+    "httpx",
 ]
 
 [tool.pytest.ini_options]

@@ -18,7 +18,7 @@ Task 001
 
 ## Acceptance Criteria
 
-- `Dockerfile` builds the app image with pinned dependencies and a non-root runtime user
+- `Dockerfile` builds the app image with a non-root runtime user *(amended: the original "pinned dependencies" criterion conflicts with AGENTS.md, which forbids committing a lockfile or `==` pins until the pinning follow-up task — the image resolves dependencies unpinned for now; revisit when pinning lands)*
 - `docker-compose.yml` runs the app plus a checkpoint database service for local dev
 - `.dockerignore` excludes build artifacts, virtualenvs, and secrets/`.env`
 - `docker compose up` starts the stack and the app responds to a health check

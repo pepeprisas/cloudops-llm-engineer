@@ -37,7 +37,7 @@ grep -c '^- \[ \]' tasks/000-tasks-list.md
 - [x] 003 Logging
 - [x] 004 Configuration management
 - [x] 005 Testing framework
-- [ ] 006 Docker
+- [x] 006 Docker
 - [x] 007 AWS authentication & credentials  *(assume-role/session, never generate creds)*
 
 ## Phase 2 — Core Workflow (workflow engine)
