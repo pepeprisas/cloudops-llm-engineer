@@ -54,3 +54,6 @@ python_version = "3.12"
 files = ["src", "tests"]
 strict = true
 show_error_codes = true
+# Enabled only once real errors appeared: plain strict mypy cannot see
+# BaseSettings' runtime-validated __init__ (_env_file, model kwargs).
+plugins = ["pydantic.mypy"]
