@@ -6,7 +6,7 @@ Interrupt the LangGraph state machine at WAITING_FOR_APPROVAL using the checkpoi
 
 ## Inputs
 
-Graph state at the WAITING_FOR_APPROVAL node; checkpointer from Task 010; review findings from upstream agents.
+Graph state at the WAITING_FOR_APPROVAL node; checkpointer from Task 011/012; review findings from upstream agents.
 
 ## Outputs
 
@@ -16,6 +16,7 @@ A paused checkpoint at WAITING_FOR_APPROVAL and an approve action that records t
 
 Task 010
 Task 011
+Task 012
 
 ## Acceptance Criteria
 

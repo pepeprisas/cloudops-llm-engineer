@@ -6,7 +6,7 @@ Implement the agent that generates the final deployment report, aggregating the 
 
 ## Inputs
 
-Cost estimation output (Task 028); health verdict from the VERIFYING node (Task 040); plan, reviews, and outcome from graph state.
+Cost estimation output (Task 026); health verdict from the VERIFYING node (Task 040); plan, reviews, and outcome from graph state.
 
 ## Outputs
 
@@ -14,7 +14,7 @@ A structured deployment report artifact summarizing the full run.
 
 ## Dependencies
 
-Task 028
+Task 026
 Task 040
 
 ## Acceptance Criteria

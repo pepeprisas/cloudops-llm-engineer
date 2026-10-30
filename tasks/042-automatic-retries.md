@@ -6,7 +6,7 @@ Provide a reusable retry strategy for transient failures across graph nodes. Ret
 
 ## Inputs
 
-Core configuration/settings for retry limits and backoff (Task 009).
+Core configuration/settings for retry limits and backoff (Task 004).
 
 ## Outputs
 
@@ -14,7 +14,7 @@ A retry helper/decorator usable by graph nodes and agents.
 
 ## Dependencies
 
-Task 009
+Task 004
 
 ## Acceptance Criteria
 

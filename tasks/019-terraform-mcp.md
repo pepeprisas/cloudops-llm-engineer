@@ -6,7 +6,7 @@ Build an MCP server that exposes terraform `init`, `validate`, `fmt`, `plan`, `a
 
 ## Inputs
 
-Terraform CLI; MCP server foundation (Task 007); generated Terraform project directory.
+Terraform CLI; AWS authentication (Task 007); generated Terraform project directory.
 
 ## Outputs
 
