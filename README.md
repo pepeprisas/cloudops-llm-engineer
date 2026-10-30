@@ -62,6 +62,7 @@ src/cloudpilot/
 └── core/      cross-cutting policy: config, logging, AWS session, audit,
 │              retry, llm
 tests/
+docs/          development guide and architecture notes
 ```
 
 ### Import direction
@@ -84,6 +85,14 @@ Three consequences worth stating explicitly:
 - **`mcp/` is the boundary to external systems.** Nothing outside it talks to AWS, GitHub, or terraform directly — which is what makes the "never execute shell directly" rule enforceable rather than aspirational.
 
 These rules are **enforced** by `tests/test_import_direction.py`, an AST check in the pytest suite (added by Task 002). Change the allow-table there together with this table.
+
+## Documentation
+
+- [`docs/development.md`](docs/development.md) — setup, standard checks, and
+  per-task manual verification commands (including live Docker and AWS
+  walkthroughs).
+- [`docs/architecture.md`](docs/architecture.md) — system overview, state
+  machine, what is built versus planned, and documentation conventions.
 
 ## Engineering baseline
 
