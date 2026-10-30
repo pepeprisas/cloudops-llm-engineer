@@ -2,7 +2,7 @@
 
 ## Goal
 
-Establish developer tooling for consistent, reproducible local development: dependency management with uv, linting/formatting with ruff and black, type checking with mypy, Makefile shortcuts, and pre-commit hooks.
+Establish developer tooling for consistent, reproducible local development: dependency management with uv, linting and formatting with ruff, type checking with mypy, Makefile shortcuts, and pre-commit hooks.
 
 ## Inputs
 
@@ -18,10 +18,10 @@ Task 001
 
 ## Acceptance Criteria
 
-- `pyproject.toml` contains `[tool.ruff]`, `[tool.black]`, and `[tool.mypy]` sections with sensible defaults
+- `pyproject.toml` contains `[tool.ruff]` (including `[tool.ruff.format]`) and `[tool.mypy]` sections with sensible defaults
 - Dependencies are managed via uv (lockfile generation documented/working)
-- Makefile provides `install`, `lint`, `format`, `typecheck`, and `test` targets
-- `.pre-commit-config.yaml` wires ruff, black, and mypy as hooks
+- Makefile provides `install`, `lint`, `format`, `typecheck`, and `test` targets, where `format` runs `ruff format`
+- `.pre-commit-config.yaml` wires ruff (`check` and `format`) and mypy as hooks, using the same `ruff format` command as the Makefile
 - `make lint` and `make typecheck` run cleanly on the scaffold
 - Unit tests pass
 
