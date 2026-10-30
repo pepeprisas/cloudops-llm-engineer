@@ -34,7 +34,7 @@ grep -c '^- \[ \]' tasks/000-tasks-list.md
 
 - [x] 001 Project scaffold
 - [x] 002 Development environment
-- [ ] 003 Logging
+- [x] 003 Logging
 - [ ] 004 Configuration management
 - [x] 005 Testing framework
 - [ ] 006 Docker
