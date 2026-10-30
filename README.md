@@ -106,3 +106,7 @@ Consult `AGENTS.md` before implementing.
 ## Status
 
 Phase 1 (foundation) is complete: project scaffold, dev tooling (ruff, mypy, Makefile, pre-commit), structured logging with secret redaction, typed configuration, the AWS session factory, and the containerized app with its health check. Not yet built: the workflow engine (Phase 2), agents, Terraform/MCP integration, reviews, governance, and deployment — see `tasks/000-tasks-list.md`.
+
+## License
+
+[MIT](LICENSE) — © 2026 Pepe Prisas. The vendored specifications under `specs/` and `.opencode/` retain their upstream license and provenance; see `specs/SOURCES.md`.
