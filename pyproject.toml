@@ -57,3 +57,9 @@ show_error_codes = true
 # Enabled only once real errors appeared: plain strict mypy cannot see
 # BaseSettings' runtime-validated __init__ (_env_file, model kwargs).
 plugins = ["pydantic.mypy"]
+
+# boto3/botocore ship no py.typed; they are treated as Any at the boundary.
+# Scoped narrowly so it cannot mask our own packages.
+[[tool.mypy.overrides]]
+module = ["boto3", "botocore", "botocore.*"]
+ignore_missing_imports = true
