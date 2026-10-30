@@ -32,5 +32,5 @@ Does not format (Task 023) or plan (Task 024); does not apply or destroy; does n
 
 ## Deliverables
 
-cloudpilot/graph/nodes/validate.py
+src/cloudpilot/graph/nodes/validate.py
 tests/test_validate_node.py

@@ -33,6 +33,6 @@ AuthN/AuthZ, rate limiting, and the concrete graph node business logic.
 
 ## Deliverables
 
-cloudpilot/api/app.py
-cloudpilot/api/routes.py
+src/cloudpilot/api/app.py
+src/cloudpilot/api/routes.py
 tests/test_api.py

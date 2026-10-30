@@ -32,5 +32,5 @@ Opening the pull request (Task 046), posting review comments (Task 047), and mer
 
 ## Deliverables
 
-cloudpilot/graph/nodes/commit.py
+src/cloudpilot/graph/nodes/commit.py
 tests/test_commit.py

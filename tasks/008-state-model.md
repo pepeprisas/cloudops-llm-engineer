@@ -6,7 +6,7 @@ Define the `DeploymentState` model and a status enum that match the LangGraph st
 
 ## Inputs
 
-`cloudpilot/graph/` package from Task 001.
+`src/cloudpilot/graph/` package from Task 001.
 
 ## Outputs
 
@@ -31,5 +31,5 @@ Graph node logic and persistence backends.
 
 ## Deliverables
 
-cloudpilot/graph/state.py
+src/cloudpilot/graph/state.py
 tests/test_state.py

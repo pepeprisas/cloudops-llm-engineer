@@ -31,5 +31,5 @@ Post-deploy verification (Task 040), automatic remediation, and notification/ale
 
 ## Deliverables
 
-cloudpilot/graph/nodes/incident.py
+src/cloudpilot/graph/nodes/incident.py
 tests/test_incident.py

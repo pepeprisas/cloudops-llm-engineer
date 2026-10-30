@@ -30,5 +30,5 @@ Does not modify or remediate the Terraform; does not execute terraform; does not
 
 ## Deliverables
 
-cloudpilot/agents/best_practices.py
+src/cloudpilot/agents/best_practices.py
 tests/test_best_practices_agent.py

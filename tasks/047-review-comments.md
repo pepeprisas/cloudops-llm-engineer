@@ -32,5 +32,5 @@ Opening the PR (Task 046) and merging the PR (Task 048).
 
 ## Deliverables
 
-cloudpilot/graph/nodes/review_comments.py
+src/cloudpilot/graph/nodes/review_comments.py
 tests/test_review_comments.py

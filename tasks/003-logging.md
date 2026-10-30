@@ -6,7 +6,7 @@ Provide centralized, structured application logging (JSON-capable) that every mo
 
 ## Inputs
 
-`cloudpilot/core/` package from Task 001.
+`src/cloudpilot/core/` package from Task 001.
 
 ## Outputs
 
@@ -31,5 +31,5 @@ Log shipping/aggregation backends and per-module log call instrumentation.
 
 ## Deliverables
 
-cloudpilot/core/logging.py
+src/cloudpilot/core/logging.py
 tests/test_logging.py

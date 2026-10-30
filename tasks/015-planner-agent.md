@@ -31,5 +31,5 @@ Planner Agent CANNOT generate Terraform and CANNOT deploy. Does not run shell, d
 
 ## Deliverables
 
-cloudpilot/agents/planner.py
+src/cloudpilot/agents/planner.py
 tests/test_planner_agent.py

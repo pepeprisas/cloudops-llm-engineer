@@ -31,5 +31,5 @@ Does not modify or remediate the Terraform; does not execute terraform; does not
 
 ## Deliverables
 
-cloudpilot/agents/security.py
+src/cloudpilot/agents/security.py
 tests/test_security_agent.py

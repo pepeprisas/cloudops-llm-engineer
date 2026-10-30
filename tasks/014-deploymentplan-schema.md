@@ -30,5 +30,5 @@ Does not populate the plan from a request (Planner agent, Task 015); does not ge
 
 ## Deliverables
 
-cloudpilot/models/deployment_plan.py
+src/cloudpilot/models/deployment_plan.py
 tests/test_deployment_plan.py

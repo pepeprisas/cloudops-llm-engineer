@@ -32,5 +32,5 @@ Does not make approval decisions; does not execute terraform; does not modify th
 
 ## Deliverables
 
-cloudpilot/core/audit.py
+src/cloudpilot/core/audit.py
 tests/test_audit.py

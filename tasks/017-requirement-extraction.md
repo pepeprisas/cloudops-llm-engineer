@@ -30,5 +30,5 @@ Does not detect or resolve ambiguity (Task 018); does not generate Terraform or 
 
 ## Deliverables
 
-cloudpilot/agents/planner_extraction.py
+src/cloudpilot/agents/planner_extraction.py
 tests/test_requirement_extraction.py

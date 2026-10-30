@@ -31,5 +31,5 @@ Live/interactive graph dashboards and embedding diagrams into a docs site.
 
 ## Deliverables
 
-cloudpilot/graph/visualize.py
+src/cloudpilot/graph/visualize.py
 scripts/visualize_graph.py

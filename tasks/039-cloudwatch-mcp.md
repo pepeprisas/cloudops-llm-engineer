@@ -31,5 +31,5 @@ Mutating CloudWatch resources (creating/deleting alarms), and consuming nodes (v
 
 ## Deliverables
 
-cloudpilot/mcp/cloudwatch_server.py
+src/cloudpilot/mcp/cloudwatch_server.py
 tests/test_cloudwatch_mcp.py

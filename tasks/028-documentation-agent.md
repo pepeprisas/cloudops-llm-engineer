@@ -30,5 +30,5 @@ Does not modify the Terraform; does not execute terraform; does not make approva
 
 ## Deliverables
 
-cloudpilot/agents/documentation.py
+src/cloudpilot/agents/documentation.py
 tests/test_documentation_agent.py

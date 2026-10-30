@@ -31,5 +31,5 @@ CANNOT generate infrastructure or Terraform configuration; only orchestrates app
 
 ## Deliverables
 
-cloudpilot/agents/deployment.py
+src/cloudpilot/agents/deployment.py
 tests/test_deployment_agent.py

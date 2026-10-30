@@ -32,5 +32,5 @@ Posting individual review comments (Task 047) and merging the PR (Task 048).
 
 ## Deliverables
 
-cloudpilot/graph/nodes/pr.py
+src/cloudpilot/graph/nodes/pr.py
 tests/test_pr.py

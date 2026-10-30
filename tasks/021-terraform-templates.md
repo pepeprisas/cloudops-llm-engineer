@@ -30,5 +30,5 @@ Does not implement agent logic (Task 020); does not execute terraform validate/f
 
 ## Deliverables
 
-cloudpilot/agents/templates/
+src/cloudpilot/agents/templates/
 tests/test_terraform_templates.py

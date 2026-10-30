@@ -30,5 +30,5 @@ Does not implement agent control flow (Task 015); does not perform extraction or
 
 ## Deliverables
 
-cloudpilot/agents/prompts/planner.py
+src/cloudpilot/agents/prompts/planner.py
 tests/test_planner_prompt.py

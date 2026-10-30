@@ -31,5 +31,5 @@ Merge workflow (Task 048) and the specific consuming nodes (commit, PR, review c
 
 ## Deliverables
 
-cloudpilot/mcp/github_server.py
+src/cloudpilot/mcp/github_server.py
 tests/test_github_mcp.py

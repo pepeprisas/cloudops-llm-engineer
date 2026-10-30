@@ -32,5 +32,5 @@ Delivering the report to external channels (PR comments, email), and report pers
 
 ## Deliverables
 
-cloudpilot/agents/report.py
+src/cloudpilot/agents/report.py
 tests/test_report.py

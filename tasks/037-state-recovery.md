@@ -33,5 +33,5 @@ Does not implement rollback (Task 036) or drift detection (Task 038); does not g
 
 ## Deliverables
 
-cloudpilot/graph/nodes/recover.py
+src/cloudpilot/graph/nodes/recover.py
 tests/test_recover.py

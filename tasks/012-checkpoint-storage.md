@@ -31,5 +31,5 @@ Non-SQLite production backends (e.g. Postgres) and migration tooling.
 
 ## Deliverables
 
-cloudpilot/graph/checkpoints.py
+src/cloudpilot/graph/checkpoints.py
 tests/test_checkpoints.py

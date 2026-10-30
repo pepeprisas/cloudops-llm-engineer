@@ -31,5 +31,5 @@ Does not author Terraform code (Task 020); does not implement the approval workf
 
 ## Deliverables
 
-cloudpilot/mcp/terraform_server.py
+src/cloudpilot/mcp/terraform_server.py
 tests/test_terraform_mcp.py

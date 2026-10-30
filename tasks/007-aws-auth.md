@@ -32,5 +32,5 @@ Defining IAM policies/roles themselves and MCP server business logic.
 
 ## Deliverables
 
-cloudpilot/core/aws.py
+src/cloudpilot/core/aws.py
 tests/test_aws.py

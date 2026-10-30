@@ -31,5 +31,5 @@ Does not generate infrastructure; does not implement state recovery (Task 037) o
 
 ## Deliverables
 
-cloudpilot/graph/nodes/rollback.py
+src/cloudpilot/graph/nodes/rollback.py
 tests/test_rollback.py

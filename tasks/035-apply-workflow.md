@@ -32,5 +32,5 @@ Does not generate infrastructure; does not implement rollback (Task 036), state 
 
 ## Deliverables
 
-cloudpilot/graph/nodes/apply.py
+src/cloudpilot/graph/nodes/apply.py
 tests/test_apply.py

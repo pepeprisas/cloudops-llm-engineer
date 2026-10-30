@@ -31,5 +31,5 @@ Does not modify the Terraform; does not execute terraform; does not block deploy
 
 ## Deliverables
 
-cloudpilot/agents/cost.py
+src/cloudpilot/agents/cost.py
 tests/test_cost_agent.py

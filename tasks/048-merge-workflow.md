@@ -32,5 +32,5 @@ Generating or granting the approval itself (Task 029), and post-merge deployment
 
 ## Deliverables
 
-cloudpilot/graph/nodes/merge.py
+src/cloudpilot/graph/nodes/merge.py
 tests/test_merge.py

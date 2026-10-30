@@ -31,5 +31,5 @@ Does not implement rollback of already-applied resources (Task 036) or state rec
 
 ## Deliverables
 
-cloudpilot/graph/cancel.py
+src/cloudpilot/graph/cancel.py
 tests/test_cancel.py

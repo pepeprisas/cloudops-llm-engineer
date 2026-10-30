@@ -32,5 +32,5 @@ Does not apply or destroy and does not bypass approval; does not validate (Task 
 
 ## Deliverables
 
-cloudpilot/graph/nodes/plan.py
+src/cloudpilot/graph/nodes/plan.py
 tests/test_plan_node.py

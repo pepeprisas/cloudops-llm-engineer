@@ -10,7 +10,7 @@ None
 
 ## Outputs
 
-Python package layout under `cloudpilot/` with subpackages (`agents`, `graph`, `mcp`, `api`, `models`, `core`), a `tests/` directory, and project packaging metadata.
+Python package layout under `src/cloudpilot/` with subpackages (`agents`, `graph`, `mcp`, `api`, `models`, `core`), a `tests/` directory, and project packaging metadata.
 
 ## Dependencies
 
@@ -19,7 +19,7 @@ None
 ## Acceptance Criteria
 
 - `pyproject.toml` declares the project, Python version, and build backend
-- `cloudpilot/` and subpackages (`agents`, `graph`, `mcp`, `api`, `models`, `core`) each contain `__init__.py` and are importable
+- `src/cloudpilot/` and subpackages (`agents`, `graph`, `mcp`, `api`, `models`, `core`) each contain `__init__.py` and are importable
 - `tests/` exists and is collectable by pytest
 - `pip install -e .` (or `uv pip install -e .`) succeeds
 - README.md describes project purpose and basic layout
@@ -32,11 +32,11 @@ Dev tooling configuration, dependency pinning, and any business logic in the pac
 ## Deliverables
 
 pyproject.toml
-cloudpilot/__init__.py
-cloudpilot/agents/__init__.py
-cloudpilot/graph/__init__.py
-cloudpilot/mcp/__init__.py
-cloudpilot/api/__init__.py
-cloudpilot/models/__init__.py
-cloudpilot/core/__init__.py
+src/cloudpilot/__init__.py
+src/cloudpilot/agents/__init__.py
+src/cloudpilot/graph/__init__.py
+src/cloudpilot/mcp/__init__.py
+src/cloudpilot/api/__init__.py
+src/cloudpilot/models/__init__.py
+src/cloudpilot/core/__init__.py
 README.md

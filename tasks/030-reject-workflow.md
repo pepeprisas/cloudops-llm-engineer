@@ -31,5 +31,5 @@ Does not implement approval, resume, or cancel (Tasks 029, 031, 032); does not p
 
 ## Deliverables
 
-cloudpilot/graph/nodes/reject.py
+src/cloudpilot/graph/nodes/reject.py
 tests/test_reject.py

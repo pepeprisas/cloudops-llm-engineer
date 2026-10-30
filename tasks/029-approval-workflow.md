@@ -33,5 +33,5 @@ Does not implement the reject, resume-from-disk, or cancel paths (Tasks 030, 031
 
 ## Deliverables
 
-cloudpilot/graph/nodes/approval.py
+src/cloudpilot/graph/nodes/approval.py
 tests/test_approval.py

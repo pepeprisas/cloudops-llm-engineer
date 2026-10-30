@@ -31,5 +31,5 @@ Does not remediate drift, apply changes, or roll back (Tasks 035, 036); read-onl
 
 ## Deliverables
 
-cloudpilot/graph/nodes/drift.py
+src/cloudpilot/graph/nodes/drift.py
 tests/test_drift.py

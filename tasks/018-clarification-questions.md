@@ -30,5 +30,5 @@ Does not perform requirement extraction (Task 017); does not generate Terraform 
 
 ## Deliverables
 
-cloudpilot/agents/clarify.py
+src/cloudpilot/agents/clarify.py
 tests/test_clarify.py

@@ -6,7 +6,7 @@ Provide centralized application settings loaded from environment variables via p
 
 ## Inputs
 
-`cloudpilot/core/` package from Task 001 and environment variables.
+`src/cloudpilot/core/` package from Task 001 and environment variables.
 
 ## Outputs
 
@@ -32,6 +32,6 @@ Secret management backends (e.g. AWS Secrets Manager) and runtime config reloadi
 
 ## Deliverables
 
-cloudpilot/core/config.py
+src/cloudpilot/core/config.py
 .env.example
 tests/test_config.py

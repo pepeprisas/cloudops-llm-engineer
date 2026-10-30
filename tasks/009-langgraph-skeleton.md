@@ -31,5 +31,5 @@ Real agent/MCP node implementations, persistence, conditional/approval branching
 
 ## Deliverables
 
-cloudpilot/graph/graph.py
+src/cloudpilot/graph/graph.py
 tests/test_graph.py

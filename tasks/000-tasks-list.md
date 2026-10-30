@@ -6,7 +6,7 @@ intelligent component at a time. Each numbered task has its own file
 (`NNN-slug.md`) with Goal / Inputs / Outputs / Dependencies / Acceptance
 Criteria / Out of Scope / Deliverables.
 
-Source code lives under the `cloudpilot/` package; tests under `tests/`.
+Source code lives under the `src/cloudpilot/` package; tests under `tests/`.
 
 ## Dependency rules (must hold)
 

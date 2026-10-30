@@ -32,5 +32,5 @@ Does not implement the reject or cancel paths (Tasks 030, 032); does not perform
 
 ## Deliverables
 
-cloudpilot/graph/resume.py
+src/cloudpilot/graph/resume.py
 tests/test_resume.py

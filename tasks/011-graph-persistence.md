@@ -31,5 +31,5 @@ The concrete database-backed checkpointer (Task 012) and API wiring.
 
 ## Deliverables
 
-cloudpilot/graph/persistence.py
+src/cloudpilot/graph/persistence.py
 tests/test_persistence.py

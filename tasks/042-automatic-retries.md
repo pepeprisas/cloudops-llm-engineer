@@ -31,5 +31,5 @@ Per-node retry policies, distributed/queue-based retries, and idempotency guaran
 
 ## Deliverables
 
-cloudpilot/core/retry.py
+src/cloudpilot/core/retry.py
 tests/test_retry.py

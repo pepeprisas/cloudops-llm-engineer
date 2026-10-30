@@ -31,5 +31,5 @@ Terraform Agent CANNOT apply and CANNOT plan; it performs no shell execution. Do
 
 ## Deliverables
 
-cloudpilot/agents/terraform.py
+src/cloudpilot/agents/terraform.py
 tests/test_terraform_agent.py

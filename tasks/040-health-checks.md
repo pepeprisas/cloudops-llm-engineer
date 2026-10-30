@@ -32,5 +32,5 @@ Incident detection during ongoing monitoring (Task 041), remediation, and retry 
 
 ## Deliverables
 
-cloudpilot/graph/nodes/verify.py
+src/cloudpilot/graph/nodes/verify.py
 tests/test_verify.py
