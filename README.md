@@ -54,8 +54,7 @@ Each agent has a hard capability boundary. Limiting capability limits blast radi
 This project is built using the [AI Engineering Toolkit](https://github.com/pepeprisas/ai-engineering-toolkit) specifications.
 
 - `specs/` and `.opencode/agents/build/` are vendored from the toolkit, unmodified. See `specs/SOURCES.md` for provenance.
-- `tasks/000-tasks-list.md` is the implementation roadmap. The per-task detail files live in the `ai_cloudops_engineer` reference repository.
-- CloudPilot-specific design — state machine, agent definitions, MCP contracts, API — also lives in that reference repository and is pulled in as each phase is built.
+- `tasks/` holds the ordered implementation backlog.
 
 Consult `AGENTS.md` before implementing.
 

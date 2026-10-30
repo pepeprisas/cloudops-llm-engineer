@@ -2,12 +2,9 @@
 
 Implementation roadmap for CloudPilot. Tasks are grouped into phases that build
 thin vertical slices: foundation first, then the workflow engine, then one
-intelligent component at a time.
-
-> **Provenance.** This file is the roadmap only. The per-task detail files
-> (`NNN-slug.md`, each with Goal / Inputs / Outputs / Dependencies / Acceptance
-> Criteria / Out of Scope / Deliverables) remain in the reference repository
-> `ai_cloudops_engineer/tasks/`. Open a task there when its phase comes up.
+intelligent component at a time. Each numbered task has its own file
+(`NNN-slug.md`) with Goal / Inputs / Outputs / Dependencies / Acceptance
+Criteria / Out of Scope / Deliverables.
 
 Source code lives under the `cloudpilot/` package; tests under `tests/`.
 

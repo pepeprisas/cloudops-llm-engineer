@@ -11,9 +11,8 @@ Build **CloudPilot**, a Python application that turns natural-language requests 
 1. Inspect the repository and existing project conventions.
 2. Read `specs/shared/workflow-principles.md` and `specs/workflows/build/workflow.md`.
 3. Read the relevant domain and Python guidance.
-4. Before touching anything that reaches AWS, read the relevant design references in the `ai_cloudops_engineer` repository (`docs/security.md`, `docs/agents/*.md`, `docs/mcp/*.md`). They are not vendored here.
-5. Clarify ambiguous requirements before making significant design decisions.
-6. Propose a plan with scope, design decisions, files to change, and acceptance criteria.
+4. Clarify ambiguous requirements before making significant design decisions.
+5. Propose a plan with scope, design decisions, files to change, and acceptance criteria.
 
 ## Hard rules
 
