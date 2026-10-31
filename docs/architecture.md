@@ -34,7 +34,10 @@ Each request advances through a gated state machine (Tasks 008/009 built the
 skeleton — one stub node per status, linear edges; the reject/cancel branch
 and real node logic arrive with Phases 5–7). The serving compile (Task 011)
 pauses every run at `WAITING_FOR_APPROVAL` via a checkpointer, so approval
-is what resumes it:
+is what resumes it. Task 010's API layer exposes endpoints to submit a
+deployment and to get status/approve/reject/cancel by calling the graph's
+ gate operations (start_run, get_run, record_decision, approve_run). No
+AuthN/AuthZ or rate limiting is in scope for Task 010.
 
 ```mermaid
 stateDiagram-v2
@@ -81,6 +84,7 @@ the test suite on any inverted import.
 | `core/config.py` — typed `Settings`, `CLOUDPILOT_` env prefix | **Built** (Task 004) |
 | `core/aws.py` — session factory: ambient or STS assumed role | **Built** (Task 007) |
 | `api/app.py` — app factory + `GET /health` only | **Minimal** (Task 006); full API is Task 010 |
+| `api/routes.py` — FastAPI endpoints wired to LangGraph gate ops | **Built** (Task 010) |
 | Container + compose stack (app, Postgres checkpoint DB) | **Built** (Task 006); as of Task 012 the checkpointer uses SQLite for local dev — the compose Postgres is unused pending a production-backend decision (follow-up) |
 | `graph/state.py` — `DeploymentStatus` machine + `DeploymentState` contract | **Built** (Task 008) |
 | `graph/graph.py` — compiled StateGraph, one stub node per status | **Built** (Task 009); real node logic is Phases 3–7 |
