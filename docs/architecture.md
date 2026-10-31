@@ -85,6 +85,8 @@ the test suite on any inverted import.
 | `core/aws.py` — session factory: ambient or STS assumed role | **Built** (Task 007) |
 | `api/app.py` — app factory + `GET /health` only | **Minimal** (Task 006); full API is Task 010 |
 | `api/routes.py` — FastAPI endpoints wired to LangGraph gate ops | **Built** (Task 010) |
+| `graph/visualize.py` — Mermaid/PNG rendering | **Built** (Task 013) |
+| `scripts/visualize_graph.py` — CLI to regenerate diagrams | **Built** (Task 013) |
 | Container + compose stack (app, Postgres checkpoint DB) | **Built** (Task 006); as of Task 012 the checkpointer uses SQLite for local dev — the compose Postgres is unused pending a production-backend decision (follow-up) |
 | `graph/state.py` — `DeploymentStatus` machine + `DeploymentState` contract | **Built** (Task 008) |
 | `graph/graph.py` — compiled StateGraph, one stub node per status | **Built** (Task 009); real node logic is Phases 3–7 |

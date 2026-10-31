@@ -47,6 +47,7 @@ grep -c '^- \[ \]' tasks/000-tasks-list.md
 - [x] 010 API layer (FastAPI)  *(the `User → FastAPI → LangGraph` entry point)*
 - [x] 011 Graph persistence
 - [x] 012 Checkpoint storage
+- [x] 013 Graph visualization
 - [ ] 013 Graph visualization
 
 ## Phase 3 — Planner (first intelligent component)
