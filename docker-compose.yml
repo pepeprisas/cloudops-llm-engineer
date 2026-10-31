@@ -1,6 +1,8 @@
-# Local development stack: the app plus the checkpoint database service
-# (Postgres — the choice is provisional until Task 012 wires real
-# persistence). Dev-only; production orchestration is out of scope.
+# Local development stack: the app plus a Postgres service. NOTE: since
+# Task 012 the graph checkpointer uses SQLite (Settings.checkpoint_backend,
+# local-dev scale) — this Postgres service is currently unused and kept
+# pending a production checkpoint-backend decision (see docs/architecture.md).
+# Dev-only; production orchestration is out of scope.
 #
 # NO AWS CREDENTIALS APPEAR HERE. The app reads the operator's ambient
 # credentials at runtime (env or mounted ~/.aws); compose must never

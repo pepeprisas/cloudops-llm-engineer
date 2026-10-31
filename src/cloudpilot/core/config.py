@@ -22,6 +22,7 @@ Design boundaries:
 from __future__ import annotations
 
 from functools import cache
+from pathlib import Path
 from typing import Literal
 
 from pydantic import Field
@@ -53,6 +54,16 @@ class Settings(BaseSettings):
     # time, semi-secret, never a committed real value.
     aws_sts_external_id: str | None = Field(default=None, min_length=1, max_length=128)
     aws_sts_duration_seconds: int = Field(default=3600, ge=900, le=3600)
+
+    # Checkpoint storage for graph runs (Task 012, consumed by
+    # cloudpilot.graph.persistence). 'memory' is process-local and lost on
+    # restart; 'sqlite' persists to checkpoint_path for local development.
+    checkpoint_backend: Literal["memory", "sqlite"] = "memory"
+    # The sqlite file. Default lives under /tmp because the container runs
+    # read-only with a tmpfs /tmp (docker-compose.yml); note tmpfs is
+    # volatile across container restarts — a durable path is a deployment
+    # decision, not a default.
+    checkpoint_path: Path = Path("/tmp/cloudpilot-checkpoints.db")
 
 
 @cache

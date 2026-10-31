@@ -2,11 +2,11 @@
 
 Two responsibilities, both about making graph runs durable:
 
-- :func:`create_checkpointer` is the pluggable backend factory. Task 011
-  ships the in-memory backend only; Task 012 selects the backend from
-  ``Settings`` (SQLite for local development). Callers — the API layer
-  (Task 010) and Phase 6 workflows — never construct a saver directly, so
-  exactly one place decides where run state lives.
+- :func:`create_checkpointer` is the pluggable backend factory; ``Settings``
+  selects the backend (in-memory, or SQLite for local development per Task
+  012). Callers — the API layer (Task 010) and Phase 6 workflows — never
+  construct a saver directly, so exactly one place decides where run state
+  lives.
 - :func:`create_gated_graph` is the **single serving compile site**: the
   graph every submit/status/approve/reject/cancel action runs against,
   compiled with a checkpointer and with ``GATE_INTERRUPT_BEFORE`` so a
@@ -27,13 +27,16 @@ concern (Task 033, ``core/audit.py``); this store is per-run trajectory.
 
 from __future__ import annotations
 
+import sqlite3
 from typing import Any
 
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.state import CompiledStateGraph
 
+from cloudpilot.core.config import Settings
 from cloudpilot.graph.graph import GATE_INTERRUPT_BEFORE, create_graph
 
 # Our custom types must be registered with the checkpoint serializer:
@@ -54,27 +57,38 @@ def _create_serde() -> JsonPlusSerializer:
     return JsonPlusSerializer(allowed_msgpack_modules=_STATE_MSGPACK_ALLOWLIST)
 
 
-def create_checkpointer() -> BaseCheckpointSaver[Any]:
-    """Return the checkpointer backend.
+def create_checkpointer(settings: Settings) -> BaseCheckpointSaver[Any]:
+    """Return the checkpointer backend selected by ``settings``.
 
-    In-memory for now: process-local and lost on restart, which is the
-    honest backend for Task 011's tests. Task 012 grows this into a
-    settings-driven factory (SQLite for local development) without
-    changing callers.
+    - ``memory``: process-local, lost on restart — the honest default for
+      tests and single-shot runs.
+    - ``sqlite``: file-backed (Task 012), survives restarts, local-dev
+      scale only. One connection per saver with ``check_same_thread=False``
+      so FastAPI's threadpool may share it; SqliteSaver's own lock
+      serializes writes. ``setup()`` runs eagerly here (idempotent
+      ``CREATE TABLE IF NOT EXISTS``) so an unwritable path fails at
+      startup instead of mid-workflow.
     """
-    return InMemorySaver(serde=_create_serde())
+    serde = _create_serde()
+    if settings.checkpoint_backend == "memory":
+        return InMemorySaver(serde=serde)
+    connection = sqlite3.connect(settings.checkpoint_path, check_same_thread=False)
+    saver = SqliteSaver(connection, serde=serde)
+    saver.setup()
+    return saver
 
 
 def create_gated_graph(
-    *, checkpointer: BaseCheckpointSaver[Any] | None = None
+    *, settings: Settings, checkpointer: BaseCheckpointSaver[Any] | None = None
 ) -> CompiledStateGraph[Any, Any, Any, Any]:
     """Compile the state machine for serving: durable and gate-paused.
 
-    ``checkpointer`` is required — the gate pause is meaningless without
-    one, so ``None`` is rejected rather than silently producing a graph
-    that stops early with nothing saved (langgraph's behavior without a
-    checkpointer).
+    ``checkpointer`` may be passed explicitly (tests); otherwise the
+    settings-selected backend is used. Either way the gate pause is
+    meaningless without a checkpointer, so the combination is rejected
+    rather than silently producing a graph that stops early with nothing
+    saved (langgraph's behavior without a checkpointer).
     """
     if checkpointer is None:
-        checkpointer = create_checkpointer()
+        checkpointer = create_checkpointer(settings)
     return create_graph(checkpointer=checkpointer, interrupt_before=GATE_INTERRUPT_BEFORE)

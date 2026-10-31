@@ -81,10 +81,10 @@ the test suite on any inverted import.
 | `core/config.py` — typed `Settings`, `CLOUDPILOT_` env prefix | **Built** (Task 004) |
 | `core/aws.py` — session factory: ambient or STS assumed role | **Built** (Task 007) |
 | `api/app.py` — app factory + `GET /health` only | **Minimal** (Task 006); full API is Task 010 |
-| Container + compose stack (app, Postgres checkpoint DB) | **Built** (Task 006); DB choice provisional until Task 012 |
+| Container + compose stack (app, Postgres checkpoint DB) | **Built** (Task 006); as of Task 012 the checkpointer uses SQLite for local dev — the compose Postgres is unused pending a production-backend decision (follow-up) |
 | `graph/state.py` — `DeploymentStatus` machine + `DeploymentState` contract | **Built** (Task 008) |
 | `graph/graph.py` — compiled StateGraph, one stub node per status | **Built** (Task 009); real node logic is Phases 3–7 |
-| `graph/persistence.py` — checkpointer seam + gate-paused serving compile | **Built** (Task 011); SQLite backend is Task 012 |
+| `graph/persistence.py` — checkpointer factory (memory or SQLite) + gate-paused serving compile | **Built** (Tasks 011/012) |
 | `agents/`, `mcp/`, remaining `core/`, `models/` | **Planned** (Phases 3–9) |
 
 ## External boundaries (planned)

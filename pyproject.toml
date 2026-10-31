@@ -13,6 +13,11 @@ dependencies = [
     "boto3",
     "fastapi",
     "langgraph",
+    # Concrete SQLite checkpointer for Task 012: the official LangGraph
+    # package implementing BaseCheckpointSaver for SQLite. Hand-rolling the
+    # checkpoint protocol (versioned tuples, msgpack serde, pending writes)
+    # would duplicate a maintained implementation for no benefit.
+    "langgraph-checkpoint-sqlite",
     "pydantic",
     "pydantic-settings",
     # ASGI server: FastAPI ships none, the container needs one, and Task

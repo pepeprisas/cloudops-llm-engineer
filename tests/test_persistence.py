@@ -18,6 +18,7 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.checkpoint.base import Checkpoint
 from langgraph.checkpoint.memory import InMemorySaver
 
+from cloudpilot.core.config import Settings
 from cloudpilot.graph.graph import GATE_INTERRUPT_BEFORE, create_graph
 from cloudpilot.graph.persistence import create_checkpointer, create_gated_graph
 from cloudpilot.graph.state import DeploymentState, DeploymentStatus
@@ -27,6 +28,11 @@ from cloudpilot.graph.state import DeploymentState, DeploymentStatus
 CREDENTIAL_FIELD_DENYLIST = re.compile(
     r"access_key|secret|password|token|credential", re.IGNORECASE
 )
+
+
+def _settings() -> Settings:
+    """Deterministic settings: ambient env and any local .env ignored."""
+    return Settings(_env_file=None)
 
 
 def _thread_config() -> RunnableConfig:
@@ -55,7 +61,7 @@ def _state_from_checkpoint(checkpoint: Checkpoint) -> DeploymentState:
 
 @pytest.mark.unit
 def test_run_parks_at_the_approval_gate() -> None:
-    graph = create_gated_graph()
+    graph = create_gated_graph(settings=_settings())
     config = _thread_config()
 
     paused = graph.invoke(DeploymentState(request="resize the cluster").model_dump(), config)
@@ -69,7 +75,7 @@ def test_run_parks_at_the_approval_gate() -> None:
 
 @pytest.mark.unit
 def test_resumed_run_completes_with_exactly_one_event_per_node() -> None:
-    graph = create_gated_graph()
+    graph = create_gated_graph(settings=_settings())
     config = _park_at_gate(graph)
 
     final = graph.invoke(None, config)  # input None == resume from checkpoint
@@ -93,7 +99,7 @@ def test_interrupts_require_a_checkpointer() -> None:
 def test_gated_graph_defaults_to_the_seam_backend() -> None:
     # The serving compile must work with the factory default (in-memory
     # checkpointer) so no caller needs to wire a saver to get the gate.
-    graph = create_gated_graph()
+    graph = create_gated_graph(settings=_settings())
     config = _thread_config()
     graph.invoke(DeploymentState(request="spin up a private VPC").model_dump(), config)
     assert graph.get_state(config).next == (DeploymentStatus.DEPLOYING.value,)
@@ -101,7 +107,7 @@ def test_gated_graph_defaults_to_the_seam_backend() -> None:
 
 @pytest.mark.unit
 def test_threads_are_isolated() -> None:
-    graph = create_gated_graph()
+    graph = create_gated_graph(settings=_settings())
     _park_at_gate(graph)
 
     unknown = graph.get_state(_thread_config())
@@ -112,8 +118,8 @@ def test_threads_are_isolated() -> None:
 
 @pytest.mark.unit
 def test_checkpoint_round_trip_preserves_the_state_contract() -> None:
-    checkpointer = create_checkpointer()
-    graph = create_gated_graph(checkpointer=checkpointer)
+    checkpointer = create_checkpointer(_settings())
+    graph = create_gated_graph(settings=_settings(), checkpointer=checkpointer)
     config = _park_at_gate(graph)
 
     stored = checkpointer.get_tuple(config)
@@ -133,8 +139,8 @@ def test_checkpoint_round_trip_preserves_the_state_contract() -> None:
 
 @pytest.mark.unit
 def test_no_credential_shaped_keys_are_stored() -> None:
-    checkpointer = create_checkpointer()
-    graph = create_gated_graph(checkpointer=checkpointer)
+    checkpointer = create_checkpointer(_settings())
+    graph = create_gated_graph(settings=_settings(), checkpointer=checkpointer)
     config = _park_at_gate(graph)
 
     stored = checkpointer.get_tuple(config)
@@ -146,4 +152,4 @@ def test_no_credential_shaped_keys_are_stored() -> None:
 
 @pytest.mark.unit
 def test_in_memory_is_the_pluggable_default() -> None:
-    assert isinstance(create_checkpointer(), InMemorySaver)
+    assert isinstance(create_checkpointer(_settings()), InMemorySaver)
