@@ -293,15 +293,6 @@ python scripts/visualize_graph.py --format mermaid --output graph.mmd
 Expected: mermaid output contains all 11 status nodes, `__start__`, `__end__`,
 and the `__interrupt = before` marker on `DEPLOYING`.
 
-## Phase 2 risks and limitations
-
-- **Unpinned langgraph** (Tasks 011/012/013): `langgraph-checkpoint-sqlite==3.1.3` tested; future
-  upgrades require verifying `interrupt_before`/`get_state`/`update_state` signatures.
-- **SQLite concurrency** (Task 012): One connection with internal lock; local-dev only.
-- **No audit trail** (Task 033): structured logs used; AGENTS.md hard rule 6 not satisfied.
-- **No AuthN/AuthZ** (Task 010): `deployment_id` as capability handle (128-bit UUID); documented.
-- **Cancel semantics** (Task 010): Records decision but run remains parked; full terminal semantics
-  deferred to Tasks 030/032.
 
 ## Things that touch the network
 

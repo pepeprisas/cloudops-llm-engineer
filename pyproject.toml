@@ -41,6 +41,9 @@ markers = [
     "unit: fast, isolated tests with no external dependencies",
     "integration: tests requiring external systems such as AWS",
 ]
+filterwarnings = [
+    "ignore:PNG rendering requires pygraphviz:UserWarning",
+]
 
 [tool.ruff]
 line-length = 100
