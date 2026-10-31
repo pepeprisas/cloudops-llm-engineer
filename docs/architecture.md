@@ -30,8 +30,9 @@ append-only audit trail, credential discipline) live in
 
 ## Deployment state machine
 
-Each request advances through a gated state machine (Task 008/009 build
-this; the diagram is the target design, not yet implemented):
+Each request advances through a gated state machine (Tasks 008/009 built the
+skeleton — one stub node per status, linear edges; the reject/cancel branch
+and real node logic arrive with Phases 5–7):
 
 ```mermaid
 stateDiagram-v2
@@ -79,7 +80,9 @@ the test suite on any inverted import.
 | `core/aws.py` — session factory: ambient or STS assumed role | **Built** (Task 007) |
 | `api/app.py` — app factory + `GET /health` only | **Minimal** (Task 006); full API is Task 010 |
 | Container + compose stack (app, Postgres checkpoint DB) | **Built** (Task 006); DB choice provisional until Task 012 |
-| `graph/`, `agents/`, `mcp/`, remaining `core/`, `models/` | **Planned** (Phases 2–9) |
+| `graph/state.py` — `DeploymentStatus` machine + `DeploymentState` contract | **Built** (Task 008) |
+| `graph/graph.py` — compiled StateGraph, one stub node per status | **Built** (Task 009); real node logic is Phases 3–7 |
+| `agents/`, `mcp/`, remaining `core/`, `models/` | **Planned** (Phases 3–9) |
 
 ## External boundaries (planned)
 

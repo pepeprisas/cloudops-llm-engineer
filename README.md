@@ -105,7 +105,7 @@ Consult `AGENTS.md` before implementing.
 
 ## Status
 
-Phase 1 (foundation) is complete: project scaffold, dev tooling (ruff, mypy, Makefile, pre-commit), structured logging with secret redaction, typed configuration, the AWS session factory, and the containerized app with its health check. Not yet built: the workflow engine (Phase 2), agents, Terraform/MCP integration, reviews, governance, and deployment — see `tasks/000-tasks-list.md`.
+Phase 1 (foundation) is complete: project scaffold, dev tooling (ruff, mypy, Makefile, pre-commit), structured logging with secret redaction, typed configuration, the AWS session factory, and the containerized app with its health check. Phase 2 (workflow engine) is underway: the deployment state model and the LangGraph skeleton — one stub node per status, compiled end-to-end — are built; the API layer, graph persistence, and checkpoint storage remain. Not yet built: agents, Terraform/MCP integration, reviews, governance, and deployment — see `tasks/000-tasks-list.md`.
 
 ## License
 

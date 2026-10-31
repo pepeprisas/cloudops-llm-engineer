@@ -43,7 +43,7 @@ grep -c '^- \[ \]' tasks/000-tasks-list.md
 ## Phase 2 — Core Workflow (workflow engine)
 
 - [x] 008 Deployment state model
-- [ ] 009 LangGraph skeleton
+- [x] 009 LangGraph skeleton
 - [ ] 010 API layer (FastAPI)  *(the `User → FastAPI → LangGraph` entry point)*
 - [ ] 011 Graph persistence
 - [ ] 012 Checkpoint storage
