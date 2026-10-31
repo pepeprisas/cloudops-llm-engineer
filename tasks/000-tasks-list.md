@@ -45,7 +45,7 @@ grep -c '^- \[ \]' tasks/000-tasks-list.md
 - [x] 008 Deployment state model
 - [x] 009 LangGraph skeleton
 - [ ] 010 API layer (FastAPI)  *(the `User → FastAPI → LangGraph` entry point)*
-- [ ] 011 Graph persistence
+- [x] 011 Graph persistence
 - [ ] 012 Checkpoint storage
 - [ ] 013 Graph visualization
 

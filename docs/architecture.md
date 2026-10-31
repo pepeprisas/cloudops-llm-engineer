@@ -32,7 +32,9 @@ append-only audit trail, credential discipline) live in
 
 Each request advances through a gated state machine (Tasks 008/009 built the
 skeleton — one stub node per status, linear edges; the reject/cancel branch
-and real node logic arrive with Phases 5–7):
+and real node logic arrive with Phases 5–7). The serving compile (Task 011)
+pauses every run at `WAITING_FOR_APPROVAL` via a checkpointer, so approval
+is what resumes it:
 
 ```mermaid
 stateDiagram-v2
@@ -82,6 +84,7 @@ the test suite on any inverted import.
 | Container + compose stack (app, Postgres checkpoint DB) | **Built** (Task 006); DB choice provisional until Task 012 |
 | `graph/state.py` — `DeploymentStatus` machine + `DeploymentState` contract | **Built** (Task 008) |
 | `graph/graph.py` — compiled StateGraph, one stub node per status | **Built** (Task 009); real node logic is Phases 3–7 |
+| `graph/persistence.py` — checkpointer seam + gate-paused serving compile | **Built** (Task 011); SQLite backend is Task 012 |
 | `agents/`, `mcp/`, remaining `core/`, `models/` | **Planned** (Phases 3–9) |
 
 ## External boundaries (planned)

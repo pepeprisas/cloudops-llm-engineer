@@ -18,10 +18,17 @@ Invariants this module establishes for those later tasks:
 - :func:`create_graph` is a pure factory — no settings, no singletons, no
   I/O at import or build time. Checkpointer wiring (Tasks 011/012) is
   passed in by the caller.
+- **Interrupts are enum-typed and checkpointer-guarded.**
+  ``interrupt_before`` accepts :class:`DeploymentStatus` members (not raw
+  strings) so a typo'd or renamed node cannot be expressed; interrupts
+  without a checkpointer are rejected at build time because langgraph
+  would otherwise stop the run silently with nothing persisted and no
+  error.
 """
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from datetime import UTC, datetime
 from typing import Any
 
@@ -30,6 +37,13 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 
 from cloudpilot.graph.state import DeploymentState, DeploymentStatus, StateEvent
+
+# The approval gate as a static breakpoint: pausing *before* the DEPLOYING
+# node leaves a run parked with status == WAITING_FOR_APPROVAL (the gate
+# node has run, the first mutating node has not). Single source for every
+# serving compile site — persistence.create_gated_graph — so the gate can
+# never be configured differently at two call sites.
+GATE_INTERRUPT_BEFORE: tuple[DeploymentStatus, ...] = (DeploymentStatus.DEPLOYING,)
 
 # The exact StateGraph type that StateGraph(DeploymentState) infers; spelled
 # out so add_node's overloads resolve against a concrete graph.
@@ -61,15 +75,23 @@ def _add_stub_node(builder: _Builder, status: DeploymentStatus) -> None:
 
 
 def create_graph(
-    *, checkpointer: BaseCheckpointSaver[Any] | None = None
+    *,
+    checkpointer: BaseCheckpointSaver[Any] | None = None,
+    interrupt_before: Sequence[DeploymentStatus] | None = None,
 ) -> CompiledStateGraph[Any, Any, Any, Any]:
     """Build and compile the deployment state machine.
 
     One node per :class:`DeploymentStatus`, linear edges in declaration
     order from ``START`` to ``END``. ``checkpointer`` is the forward
     seam for Tasks 011/012; ``None`` means state lives only for the
-    duration of ``invoke``.
+    duration of ``invoke``. ``interrupt_before`` pauses the run before
+    the named status nodes (``GATE_INTERRUPT_BEFORE`` is the serving
+    choice); interrupts require a checkpointer, since without one
+    langgraph stops the run silently with nothing persisted.
     """
+    if interrupt_before and checkpointer is None:
+        raise ValueError("interrupt_before requires a checkpointer to persist the paused run")
+
     builder = StateGraph(DeploymentState)
     statuses = list(DeploymentStatus)
     for status in statuses:
@@ -84,4 +106,9 @@ def create_graph(
     # CompiledStateGraph's four type parameters are framework inference
     # details at this boundary; any-typed here deliberately (same stance as
     # the boto3 overrides in pyproject.toml), not because state is untyped.
-    return builder.compile(checkpointer=checkpointer)
+    return builder.compile(
+        checkpointer=checkpointer,
+        interrupt_before=[status.value for status in interrupt_before]
+        if interrupt_before
+        else None,
+    )
