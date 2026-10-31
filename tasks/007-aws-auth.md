@@ -19,7 +19,7 @@ Task 004
 ## Acceptance Criteria
 
 - Provides a function returning a configured `boto3.Session` from ambient credentials or an assumed role
-- NEVER generates, mints, or persists AWS credentials; only reads ambient/assumed ones (per docs/security.md)
+- NEVER generates, mints, or persists AWS credentials; only reads ambient/assumed ones (per the AGENTS.md hard rules)
 - Role assumption uses STS `assume_role` with a scoped session for least privilege
 - Region and role configuration come from `Settings`
 - Credentials are never logged (integrates with the logging module's redaction)

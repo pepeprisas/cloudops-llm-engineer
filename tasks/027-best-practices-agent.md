@@ -21,7 +21,7 @@ Task 020
 - Checks adherence to AWS best practices (tagging, naming, resource configuration)
 - Checks adherence to Terraform conventions (module structure, variable usage, provider pinning)
 - Findings are returned as a typed pydantic model with affected resource references
-- Every review action is logged per docs/security.md
+- Every review action is logged per the AGENTS.md hard rules
 - Unit tests pass
 
 ## Out of Scope

@@ -22,7 +22,7 @@ Task 020
 - Detects over-broad IAM (wildcard actions/resources, admin-equivalent policies)
 - Detects unencrypted resources (volumes, buckets, databases without encryption)
 - Findings are returned as a typed pydantic model with severity and resource references
-- Every review action is logged per docs/security.md
+- Every review action is logged per the AGENTS.md hard rules
 - Unit tests pass
 
 ## Out of Scope

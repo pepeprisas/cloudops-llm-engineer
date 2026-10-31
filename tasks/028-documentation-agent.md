@@ -21,7 +21,7 @@ Task 020
 - Summarizes the resources to be created, changed, and destroyed
 - Output is human-readable and suitable for an approver to review
 - Summary is returned through a typed pydantic model
-- Every summary action is logged per docs/security.md
+- Every summary action is logged per the AGENTS.md hard rules
 - Unit tests pass
 
 ## Out of Scope

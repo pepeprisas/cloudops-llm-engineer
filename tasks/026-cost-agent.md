@@ -22,7 +22,7 @@ Task 020
 - Provides a per-resource cost breakdown
 - Flags resources whose cost exceeds a configurable threshold
 - Estimate is returned as a typed pydantic model
-- Every review action is logged per docs/security.md
+- Every review action is logged per the AGENTS.md hard rules
 - Unit tests pass
 
 ## Out of Scope

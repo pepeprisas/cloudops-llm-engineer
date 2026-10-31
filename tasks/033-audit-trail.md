@@ -2,7 +2,7 @@
 
 ## Goal
 
-Implement an append-only audit log that captures every action, state transition, and approval with who/what/when. This is required by docs/security.md and is consumed by all mutating and approval workflows.
+Implement an append-only audit log that captures every action, state transition, and approval with who/what/when. This is required by the AGENTS.md hard rules and is consumed by all mutating and approval workflows.
 
 ## Inputs
 
@@ -22,7 +22,7 @@ Task 012
 - Records every action, state transition, and approval with who/what/when
 - Log is append-only: existing records cannot be modified or deleted
 - Records are typed pydantic models
-- Captures every state change and approval as required by docs/security.md
+- Captures every state change and approval as required by the AGENTS.md hard rules
 - No AWS credentials are generated or stored in the log
 - Unit tests pass
 

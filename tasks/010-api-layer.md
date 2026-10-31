@@ -23,7 +23,7 @@ Task 009
 - Approve/reject act on the human-in-the-loop approval gate; cancel halts a run
 - Request/response bodies are validated pydantic models
 - A health-check endpoint is provided
-- Approval cannot be bypassed via the API (per docs/security.md)
+- Approval cannot be bypassed via the API (per the AGENTS.md hard rules)
 - Every endpoint action is logged
 - Unit tests pass (TestClient covering each route)
 

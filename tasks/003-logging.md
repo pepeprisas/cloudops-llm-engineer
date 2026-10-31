@@ -22,7 +22,7 @@ Task 001
 - A setup function configures handlers and supports JSON-formatted output (toggleable for local human-readable mode)
 - Log records include timestamp, level, logger name, and message at minimum
 - No secrets or AWS credentials are ever logged
-- Every action is loggable in a structured, audit-friendly format (per docs/security.md)
+- Every action is loggable in a structured, audit-friendly format (per the AGENTS.md hard rules)
 - Unit tests pass
 
 ## Out of Scope
