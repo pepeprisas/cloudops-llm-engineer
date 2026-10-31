@@ -144,6 +144,165 @@ The `healthy` status is the image's own HEALTHCHECK (a urllib request to
 port 8000 was already taken on the build machine — change the mapping in
 `docker-compose.yml` if your 8000 is free.
 
+### 008 — Deployment state model
+
+```bash
+.venv/bin/python -m pytest tests/test_state.py -v
+```
+
+The state contract enforces the deployment state machine, frozen models, and
+credential-free field names:
+
+```bash
+.venv/bin/python -c "
+from cloudpilot.graph.state import DeploymentState, DeploymentStatus
+s = DeploymentState(request='deploy a bucket')
+print('status:', s.status)  # → REQUEST_RECEIVED
+print('deployment_id:', s.deployment_id)
+print('events:', s.events)  # → []
+print('schema_version:', s.schema_version)  # → 1
+"
+```
+
+Expected: `status` is `REQUEST_RECEIVED`, `deployment_id` is a UUID, events
+is an empty list. The schema version is `1`.
+
+### 009 — LangGraph skeleton
+
+```bash
+.venv/bin/python -m pytest tests/test_graph.py -v
+```
+
+Live demo — graph compiles and runs end-to-end:
+
+```bash
+.venv/bin/python -c "
+from cloudpilot.graph.graph import create_graph
+g = create_graph()
+final = g.invoke({'request': 'test'})
+print('status:', final['status'])  # → COMPLETED
+print('event count:', len(final['events']))  # → 11 (one per status)
+print('status sequence:', [e.status for e in final['events']])
+"
+```
+
+Expected: `status` is `COMPLETED`, event count is `11` (one per
+`DeploymentStatus` member), and events trace the full state machine.
+
+### 010 — API layer
+
+```bash
+.venv/bin/python -m pytest tests/ -k 'not test_cli' -v
+```
+
+Live demo — health and 404:
+
+```bash
+.venv/bin/python -c "
+from cloudpilot.api.app import create_app
+from fastapi.testclient import TestClient
+app = create_app()
+client = TestClient(app)
+print('health:', client.get('/health').json())  # → {'status': 'ok'}
+print('404:', client.get('/unknown').status_code)  # → 404
+"
+```
+
+Expected: `/health` returns `{"status": "ok"}`; unknown routes return `404`.
+
+### 011 — Graph persistence
+
+```bash
+.venv/bin/python -m pytest tests/test_persistence.py -v
+```
+
+Live demo — park at approval gate and resume:
+
+```bash
+.venv/bin/python -c "
+from cloudpilot.core.config import Settings
+from cloudpilot.graph.persistence import create_gated_graph
+settings = Settings(_env_file=None)
+g = create_gated_graph(settings=settings)
+config = {'configurable': {'thread_id': 'demo'}}
+g.invoke({'request': 'test'}, config)
+state = g.get_state(config)
+print('parked at:', state.values['status'])  # → WAITING_FOR_APPROVAL
+print('next node:', state.next)  # → ('DEPLOYING',)
+g.invoke(None, config)  # resume
+print('completed:', g.get_state(config).values['status'])  # → COMPLETED
+"
+```
+
+Expected: the run parks at `WAITING_FOR_APPROVAL` with `next == ('DEPLOYING',)`;
+resuming completes the run with no duplicated events.
+
+### 012 — Checkpoint storage (SQLite)
+
+```bash
+.venv/bin/python -m pytest tests/test_checkpoints.py -v
+```
+
+Live demo — restart round-trip (simulates process restart):
+
+```bash
+.venv/bin/python -c "
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from cloudpilot.core.config import Settings
+from cloudpilot.graph.persistence import create_checkpointer, create_gated_graph
+with TemporaryDirectory() as tmp:
+    path = Path(tmp) / 'cp.db'
+    settings = Settings(checkpoint_backend='sqlite', checkpoint_path=path, _env_file=None)
+    g1 = create_gated_graph(settings=settings)
+    config = {'configurable': {'thread_id': 'restart'}}
+    g1.invoke({'request': 'test'}, config)
+    del g1  # close connection to flush
+    # New instance, same file
+    g2 = create_gated_graph(settings=settings)
+    state = g2.get_state(config)
+    print('survived restart:', state.values['status'])  # → WAITING_FOR_APPROVAL
+"
+```
+
+Expected: the run state survives process restart and can be resumed from the
+same file.
+
+### 013 — Graph visualization
+
+```bash
+.venv/bin/python -m pytest tests/test_graph_visualize.py -v
+```
+
+Live demo — mermaid output:
+
+```bash
+.venv/bin/python -c "
+from cloudpilot.core.config import Settings
+from cloudpilot.graph.persistence import create_gated_graph
+from cloudpilot.graph.visualize import mermaid
+settings = Settings(_env_file=None)
+g = create_gated_graph(settings=settings)
+print(mermaid(g))  # → Mermaid flowchart with all nodes
+" > graph.mmd
+
+# CLI script
+python scripts/visualize_graph.py --format mermaid --output graph.mmd
+```
+
+Expected: mermaid output contains all 11 status nodes, `__start__`, `__end__`,
+and the `__interrupt = before` marker on `DEPLOYING`.
+
+## Phase 2 risks and limitations
+
+- **Unpinned langgraph** (Tasks 011/012/013): `langgraph-checkpoint-sqlite==3.1.3` tested; future
+  upgrades require verifying `interrupt_before`/`get_state`/`update_state` signatures.
+- **SQLite concurrency** (Task 012): One connection with internal lock; local-dev only.
+- **No audit trail** (Task 033): structured logs used; AGENTS.md hard rule 6 not satisfied.
+- **No AuthN/AuthZ** (Task 010): `deployment_id` as capability handle (128-bit UUID); documented.
+- **Cancel semantics** (Task 010): Records decision but run remains parked; full terminal semantics
+  deferred to Tasks 030/032.
+
 ## Things that touch the network
 
 Only two: `docker compose up` (image pulls) and the live AWS commands in
